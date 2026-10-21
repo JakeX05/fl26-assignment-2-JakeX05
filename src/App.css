@@ -1,1 +1,338 @@
-/* Paste your Assignment 1 styles.css here. Keep the icons in src/assets/ so url(assets/...) paths keep working. */
+/* Page defaults */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #000000;
+    background: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    display: block;
+    flex-shrink: 0;
+}
+
+:focus-visible {
+    outline: 2px solid #2459a6;
+    outline-offset: 3px;
+}
+
+/* Top bar and quick find */
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 50px;
+    padding: 8px 24px 8px 48px;
+    color: #ffffff;
+    background: #dc4c3e;
+}
+
+.menu-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.quick-find {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 230px;
+    min-width: 0;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background: rgb(255 255 255 / 20%);
+}
+
+.quick-find input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    color: #ffffff;
+    background: transparent;
+}
+
+.quick-find input::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.task-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin: 0 0 0 auto;
+}
+
+/* Sidebar beside the inbox */
+.workspace {
+    display: flex;
+    min-height: calc(100vh - 50px);
+}
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    padding: 30px 8px 30px 40px;
+    background: #fefbf2;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 3px;
+    color: #000000;
+    background: transparent;
+    text-align: left;
+    text-decoration: none;
+}
+
+.nav-item[aria-current="page"] {
+    background: #ffffff;
+    font-weight: 700;
+}
+
+.task-count {
+    color: #7e7d79;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* Inbox tasks */
+.inbox {
+    flex: 1;
+    min-width: 0;
+    padding: 32px clamp(16px, 5vw, 60px);
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
+
+.tasks li {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.task span {
+    overflow-wrap: anywhere;
+}
+
+/* Round checkboxes, with a red center when checked. */
+.task input {
+    appearance: none;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border: 1.5px solid #999999;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.task input:checked {
+    border-color: #dc4c3e;
+    background: #dc4c3e;
+    box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+/* Leave more room for tasks on phones. */
+@media (max-width: 480px) {
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        gap: 8px;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .quick-find {
+        flex: 1;
+    }
+
+    .inbox {
+        padding: 24px 20px;
+    }
+}
+
+/* React task controls, extending the Assignment 1 layout. */
+.sidebar[hidden] {
+    display: none;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.filters button {
+    border: 0;
+    padding: 4px 10px;
+    background: transparent;
+    color: #555;
+}
+
+.filters button:first-child {
+    padding-left: 0;
+}
+
+.filters button + button {
+    border-left: 1px solid #ccc;
+}
+
+.filters button[aria-pressed="true"] {
+    color: #b83226;
+    font-weight: 700;
+}
+
+.filters button:hover {
+    text-decoration: underline;
+}
+
+.filters button:active {
+    background: #fcebe9;
+}
+
+.task-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.task {
+    flex: 1;
+    min-width: 0;
+}
+
+.completed .task span {
+    color: #777;
+    text-decoration: line-through;
+}
+
+.delete-button {
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background: transparent;
+    color: #a52b22;
+}
+
+.delete-button:hover {
+    background: #fcebe9;
+    border-color: #eac2bd;
+}
+
+.delete-button:active {
+    background: #f5d6d2;
+}
+
+.task-row:hover {
+    background: #fafafa;
+}
+
+.task-form {
+    margin-top: 24px;
+}
+
+.task-form > label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.task-form-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.task-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.task-form button {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 3px;
+    background: #b83226;
+    color: white;
+}
+
+.task-form button:hover:not(:disabled) {
+    background: #9c291f;
+}
+
+.task-form button:active:not(:disabled) {
+    background: #7d2119;
+}
+
+.task-form button:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.menu-button:hover {
+    opacity: .8;
+}
+
+.menu-button:active {
+    opacity: .6;
+}
+
+a.nav-item:hover {
+    background: #fff;
+}
+
+a.nav-item:active {
+    background: #fcebe9;
+}
+
+.empty-state {
+    padding: 20px 0;
+    color: #666;
+}
